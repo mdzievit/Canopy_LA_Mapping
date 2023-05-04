@@ -1,0 +1,9 @@
+Trait	Coded_Trait
+ULA	1
+MLA	4
+FUELA	3
+TUELA	2
+lin_a	6
+lin_b1	7
+Avg_LA	8
+lin_rsq_t	5
