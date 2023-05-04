@@ -1,0 +1,8 @@
+First need to take the filtered SNPs from Step 1 script and use those with vcfTools to filter the progeny SNP data. These vcf files are too large and would need to be requested from the authors.
+
+Next step would be to run the genotype corrector python pipeline (see paper for more details) with the filtered progeny data that is converted into the 
+AB formart the genotype corrector needs. There is a python script called VCF_to_AB.py that will do that.
+
+Unfortunately, I was not able to recover the exact commands that went from filtering progeny SNPs, formatting to AB format, and then running genotype corrector.
+
+The output of genotype corrector is used for the next step.
