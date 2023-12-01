@@ -2,11 +2,38 @@ library(qtl)
 library(tidyverse)
 library(ASMap)
 
+gc_data <- read_tsv("SNP_Analysis/Filtered_SNPs/B73_Population/Genotype_Corrector/B73_Progeny_Corrected_Bin_1mismatch.map")
+
+gc_data_prep <- gc_data %>% 
+  t() %>% 
+  as.data.frame() %>% 
+  rownames_to_column(var = "id")
+
+colnames(gc_data_prep) <- gc_data_prep[1,]
+
+fake_pheno <- gc_data %>% 
+  select(locus_name) %>% 
+  separate("locus_name",
+           into = c("chr","delete")) %>% 
+  select(-delete) %>% 
+  mutate(chr = as.numeric(gsub(pattern = "chr",replacement = "",x = chr))) %>% 
+  pull(chr)
+
+fake_pheno <- c(NA_integer_,fake_pheno)
+
+gc_data_prep <- gc_data_prep %>% 
+  rename(id = locus_name)
+
+gc_data_prep[1,] <- fake_pheno 
+
+write_csv(x = gc_data_prep,
+          file = "SNP_Analysis/Filtered_SNPs/B73_Population/RQTL_Analysis/B73_Progeny_Corrected.map_Bin_1mismatch.rqtl_input.csv",
+          na = "")
 
 ##Read in all of the data from the binned markers (After genotype corrector)
 ##Use this to remove individuals and markers
 mapthis_b <- read.cross(format = "csv",
-                      file = "SNP_Analysis/Filtered_SNPs/B73_Population/RQTL_Analysis/B73_Progeny_Corrected.map_Bin_1mismatch.rqtl.csv",
+                      file = "SNP_Analysis/Filtered_SNPs/B73_Population/RQTL_Analysis/B73_Progeny_Corrected.map_Bin_1mismatch.rqtl_input.csv",
                       na.strings = c("-","X"),
                       crosstype = "riself",
                       alleles = c("A","B"),
@@ -79,10 +106,38 @@ write.cross(cross = mapthis_b_gm.clean,
 
 #######Precleaning the Mo17 data###########
 
+gc_data <- read_tsv("SNP_Analysis/Filtered_SNPs/Mo17_Population/Genotype_Corrector/Mo17_Progeny_Corrected_Bin_1mistmatch.map")
+
+gc_data_prep <- gc_data %>% 
+  t() %>% 
+  as.data.frame() %>% 
+  rownames_to_column(var = "id")
+
+colnames(gc_data_prep) <- gc_data_prep[1,]
+
+fake_pheno <- gc_data %>% 
+  select(locus_name) %>% 
+  separate("locus_name",
+           into = c("chr","delete")) %>% 
+  select(-delete) %>% 
+  mutate(chr = as.numeric(gsub(pattern = "chr",replacement = "",x = chr))) %>% 
+  pull(chr)
+
+fake_pheno <- c(NA_integer_,fake_pheno)
+
+gc_data_prep <- gc_data_prep %>% 
+  rename(id = locus_name)
+
+gc_data_prep[1,] <- fake_pheno 
+
+write_csv(x = gc_data_prep,
+          file = "SNP_Analysis/Filtered_SNPs/Mo17_Population/RQTL_Analysis/Mo17_Progeny_Corrected.map_1mismatch.rqtl_input.csv",
+          na = "")
+
 ##Read in all of the data from the binned markers (After genotype corrector)
 ##Use this to remove individuals and markers
 mapthis_m <- read.cross(format = "csv",
-                      file = "SNP_Analysis/Filtered_SNPs/Mo17_Population/RQTL_Analysis/Mo17_Progeny_Corrected.map_1mismatch.rqtl.csv",
+                      file = "SNP_Analysis/Filtered_SNPs/Mo17_Population/RQTL_Analysis/Mo17_Progeny_Corrected.map_1mismatch.rqtl_input.csv",
                       na.strings = c("-","X"),
                       crosstype = "riself",
                       alleles = c("A","B"),
