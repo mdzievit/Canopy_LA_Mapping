@@ -121,6 +121,7 @@ parent_avg <-  coded_data %>%
   group_by(Gen,Trait) %>% 
   summarise(Avg_Value = mean(Value,
                              na.rm = TRUE),
+            StdErr = sd(Value,na.rm = TRUE)/sqrt(n()),
             .groups = 'drop')
 
 write_tsv(parent_avg,path = "Phenotype_Analysis/Parent_Avg_All_Traits.txt",
