@@ -1,6 +1,6 @@
 ## **GENETIC MAPPING FOR DYNAMIC CONTROL OF LEAF ANGLE ACROSS MULTIPLE CANOPY LEVELS IN MAIZE
 
-In preparation for submission to the Plant Genome journal
+Accepted into the Plant Genome Journal (11/2023)
 
 Matthew J. Dzievit, Xianran Li, Jianming Yu
 
