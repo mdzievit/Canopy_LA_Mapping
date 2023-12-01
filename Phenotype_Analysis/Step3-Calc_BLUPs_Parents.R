@@ -158,6 +158,17 @@ traits <- dh_blups %>%
          `Canopy slope`) %>% 
   mutate(Pop = ifelse(Pop == 4,"B73","Mo17"))
 
+dh_summary <- traits %>% 
+  gather(Trait,Value,-Gen2,-Pop) %>% 
+  group_by(Pop,Trait) %>% 
+  summarise(Avg = mean(Value),
+            Max = max(Value),
+            Min = min(Value),
+            SD = sd(Value),
+            n = n(),
+            sdErr = SD/sqrt(n),
+            .groups = 'drop')
+
 slope_lims <- range(traits$`Canopy slope`)
 slope_lims_text <- round(scales::rescale(c(30,40,60,80,90),to = slope_lims),1)[2:4]
 
@@ -278,17 +289,8 @@ write_tsv(x = par_blues %>%
 ####summary
 ####
 
-dh_summary <- traits %>% 
-  gather(Trait,Value,-Gen2,-Pop) %>% 
-  group_by(Pop,Trait) %>% 
-  summarise(Avg = mean(Value),
-            Max = max(Value),
-            Min = min(Value),
-            SD = sd(Value),
-            n = n(),
-            .groups = 'drop')
-
 ##f1_summary
+
 f1 <- read_tsv("Phenotype_Analysis/F1-2017_2018.txt") %>% 
   mutate(Coded_Trait = case_when(
     Trait == "ULA" ~ 1,
@@ -310,12 +312,17 @@ f1 <- read_tsv("Phenotype_Analysis/F1-2017_2018.txt") %>%
               select(-Year))
 
 f1_summary <- f1 %>%
-  group_by(Trait,Pedigree) %>% 
+  mutate(F1 = case_when(
+    str_detect(Pedigree,"B73") ~ "B73",
+    TRUE ~ "Mo17")) |> 
+  group_by(Trait,F1) %>% 
   summarise(Avg = mean(Value),
             Max = max(Value),
             Min = min(Value),
             SD = sd(Value),
-            n = n())
+            n = n(),
+            sdErr = SD/sqrt(n),
+            .groups = 'drop')
 
 write_tsv(x = dh_summary,
           path = "Phenotype_Analysis/Table-Summary/DH_Summary.txt")
