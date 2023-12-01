@@ -1,29 +1,29 @@
-Order	QTL	QTL Class	LA	Coded	Additive	Significant
-2	Chr2:209Mb	Stable	One above ear	1	1.58	Yes
-2	Chr2:209Mb	Stable	One below flag	5	2.11	No
-2	Chr2:209Mb	Stable	Three above ear	3	1.55	No
-2	Chr2:209Mb	Stable	Two below ear	-2	1.38	Yes
-1	Chr1:300Mb	Stable	One above ear	1	1.73	Yes
-1	Chr1:300Mb	Stable	One below flag	5	2.37	Yes
-1	Chr1:300Mb	Stable	Three above ear	3	1.78	No
-1	Chr1:300Mb	Stable	Two below ear	-2	1.59	Yes
-3	Chr3:2Mb	Dynamic	One above ear	1	1.08	No
-3	Chr3:2Mb	Dynamic	One below flag	5	2.81	Yes
-3	Chr3:2Mb	Dynamic	Three above ear	3	2.08	Yes
-3	Chr3:2Mb	Dynamic	Two below ear	-2	0.32	No
-4	Chr3:148Mb	Dynamic	One above ear	1	2.08	Yes
-4	Chr3:148Mb	Dynamic	One below flag	5	1.18	No
-4	Chr3:148Mb	Dynamic	Three above ear	3	2.01	Yes
-4	Chr3:148Mb	Dynamic	Two below ear	-2	0.88	No
-5	Chr3:183-197Mb	Dynamic	One above ear	1	1.48	Yes
-5	Chr3:183-197Mb	Dynamic	One below flag	5	3.35	Yes
-5	Chr3:183-197Mb	Dynamic	Three above ear	3	2.43	Yes
-5	Chr3:183-197Mb	Dynamic	Two below ear	-2	0.79	No
-6	Chr4:159Mb	Stable	One above ear	1	1.95	Yes
-6	Chr4:159Mb	Stable	One below flag	5	1.7	No
-6	Chr4:159Mb	Stable	Three above ear	3	1.64	No
-6	Chr4:159Mb	Stable	Two below ear	-2	1.76	Yes
-7	Chr5:55-90Mb	Dynamic	One above ear	1	1.59	Yes
-7	Chr5:55-90Mb	Dynamic	One below flag	5	4.14	Yes
-7	Chr5:55-90Mb	Dynamic	Three above ear	3	2.35	Yes
-7	Chr5:55-90Mb	Dynamic	Two below ear	-2	1.29	Yes
+Order	QTL	QTL Class	LA	Coded	Additive	Significant	Source
+1	Chr1:300Mb	Stable	Two below ear	-2	1.59	Yes	Mo17
+1	Chr1:300Mb	Stable	One above ear	1	1.73	Yes	Mo17
+1	Chr1:300Mb	Stable	Three above ear	3	1.82	No	Mo17
+1	Chr1:300Mb	Stable	One below flag	5	2.37	Yes	Mo17
+2	Chr2:209Mb	Stable	Two below ear	-2	1.38	Yes	Mo17
+2	Chr2:209Mb	Stable	One above ear	1	1.58	Yes	Mo17
+2	Chr2:209Mb	Stable	Three above ear	3	1.55	No	Mo17
+2	Chr2:209Mb	Stable	One below flag	5	2.11	No	Mo17
+3	Chr3:2Mb	Dynamic	Two below ear	-2	-0.32	No	Mo17
+3	Chr3:2Mb	Dynamic	One above ear	1	-1.08	No	Mo17
+3	Chr3:2Mb	Dynamic	Three above ear	3	-2.08	Yes	Mo17
+3	Chr3:2Mb	Dynamic	One below flag	5	-2.81	Yes	Mo17
+4	Chr3:148Mb	Dynamic	Two below ear	-2	0.88	No	B73
+4	Chr3:148Mb	Dynamic	One above ear	1	2.08	Yes	B73
+4	Chr3:148Mb	Dynamic	Three above ear	3	2.01	Yes	B73
+4	Chr3:148Mb	Dynamic	One below flag	5	1.18	No	B73
+5	Chr3:183-197Mb	Dynamic	Two below ear	-2	-0.79	No	Mo17
+5	Chr3:183-197Mb	Dynamic	One above ear	1	-1.48	Yes	Mo17
+5	Chr3:183-197Mb	Dynamic	Three above ear	3	-2.43	Yes	Mo17
+5	Chr3:183-197Mb	Dynamic	One below flag	5	-3.35	Yes	Mo17
+6	Chr4:159Mb	Stable	Two below ear	-2	1.76	Yes	Mo17
+6	Chr4:159Mb	Stable	One above ear	1	1.95	Yes	Mo17
+6	Chr4:159Mb	Stable	Three above ear	3	1.64	No	Mo17
+6	Chr4:159Mb	Stable	One below flag	5	1.7	No	Mo17
+7	Chr5:55-90Mb	Dynamic	Two below ear	-2	1.29	Yes	Mo17
+7	Chr5:55-90Mb	Dynamic	One above ear	1	1.59	Yes	Mo17
+7	Chr5:55-90Mb	Dynamic	Three above ear	3	2.35	Yes	Mo17
+7	Chr5:55-90Mb	Dynamic	One below flag	5	4.14	Yes	Mo17
