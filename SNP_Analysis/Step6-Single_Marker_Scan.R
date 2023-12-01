@@ -36,7 +36,7 @@ b73_snps <- data %>%
   mutate(CHR = as.numeric(str_replace(CHR,"chr","")),
          BP = as.numeric(BP),
          SNP2 = row_number())
-write_tsv(path = "SNP_Analysis/Filtered_SNPs/B73_Population/B73_single_marker_scan_snps.txt",
+write_tsv(file = "SNP_Analysis/Filtered_SNPs/B73_Population/B73_single_marker_scan_snps.txt",
           x = b73_snps)
 
 model_out <-  data %>%
@@ -48,10 +48,11 @@ model_out <-  data %>%
 
 b73_pvalues <- model_out %>%
   filter(term == "Call") %>%
-  left_join(b73_snps) %>%
+  left_join(b73_snps,
+            by = "SNP") %>%
   arrange(p.value)
 
-write_tsv(path = "SNP_Analysis/Filtered_SNPs/B73_Population/B73_single_marker_scan_pvalues_BLUPs.txt",
+write_tsv(file = "SNP_Analysis/Filtered_SNPs/B73_Population/B73_single_marker_scan_pvalues_BLUPs.txt",
           x = b73_pvalues)
 
 rm(data,model_out)
@@ -85,7 +86,8 @@ b73_renumber_man <- b73_snps %>%
             Min2 = min(Order)) %>% 
   ungroup() %>% 
   mutate(Chromosome = CHR) %>% 
-  left_join(b73_midpoints_all) %>%
+  left_join(b73_midpoints_all,
+            by = "CHR") %>%
   ungroup() %>%
   mutate(Ratio = (Max - Min)/(Max2 - Min2)) %>% 
   select(CHR,Min,Ratio)
@@ -94,7 +96,8 @@ b73_renumber_man <- b73_snps %>%
 b73_midpoints_man <- b73_renumber_man %>% 
   left_join(b73_pvalues %>% 
               select(CHR,BP) %>% 
-              unique()) %>% 
+              unique(),
+            by = "CHR") %>% 
   arrange(CHR,BP) %>% 
   group_by(CHR) %>%
   mutate(Order = (((row_number() - 1) * Ratio) + Min)) %>% 
@@ -104,8 +107,12 @@ b73_midpoints_man <- b73_renumber_man %>%
   ungroup()
 
 manhattan_plotter <- function(data,cur_Trait, midpoints,renumber) {
-  data %>%
-    filter(Trait == cur_Trait) %>%
+  data_filt <- data %>%
+    filter(Trait == cur_Trait) 
+  
+  pval_bon <- -log10((0.05/nrow(data_filt)))
+  
+  data_filt |> 
     arrange(CHR,BP) %>%
     left_join(renumber,by = c("CHR")) %>%
     arrange(CHR,BP) %>% 
@@ -124,6 +131,7 @@ manhattan_plotter <- function(data,cur_Trait, midpoints,renumber) {
                    color = factor(Color)),
                show.legend = FALSE,
                size = .5) +
+    geom_hline(aes(yintercept = pval_bon),color = 'red') +
     xlab("Chromosome") +
     scale_x_continuous(labels = c(1:10),
                        breaks = midpoints %>%
@@ -169,11 +177,6 @@ manhattan_plotter <- function(data,cur_Trait, midpoints,renumber) {
 
 
 plot_grid(b73_ULA,b73_TUELA,b73_FUELA,b73_MLA,ncol = 1)
-
-manhattan_plotter(data = b73_pvalues,
-                  cur_Trait = "Ear_Shank",
-                  midpoints = b73_midpoints_man,
-                  renumber = b73_renumber_man)
 
 ggsave(filename = "SNP_Analysis/Filtered_SNPs/B73_Population/Combined_ComparisonFigure_Supplemental_color_BLUPs.png",
        plot = plot_grid(b73_ULA,b73_TUELA,b73_FUELA,b73_MLA,ncol = 1),
