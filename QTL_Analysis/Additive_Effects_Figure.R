@@ -6,6 +6,7 @@ data <- read_tsv("QTL_Analysis/QTL_Additive_Classes.txt")
 
 (out <- data %>%
     mutate(`QTL Class` = factor(`QTL Class`),
+           QTL = paste0(QTL," (",Source,")"),
            QTL = factor(QTL) %>% fct_reorder(Order)) %>% 
     ggplot(aes(x = Coded,y = Additive,group = QTL)) +
     geom_point(aes(color = QTL,
@@ -13,7 +14,7 @@ data <- read_tsv("QTL_Analysis/QTL_Additive_Classes.txt")
                size = 3) +
     geom_line(aes(linetype = `QTL Class`,
                   color = QTL),
-              size = 1) +
+              linewidth = 1) +
     theme_bw() +
     scale_x_continuous(breaks = c(-2,0,1,3,5),
                     labels = c("Two below ear",
@@ -31,7 +32,7 @@ data <- read_tsv("QTL_Analysis/QTL_Additive_Classes.txt")
     #                    name = "Canopy position") +
     coord_flip() +
     ylab("Additive effect") +
-    scale_y_continuous(limits = c(0,4.2)) +
+    scale_y_continuous(limits = c(-4.5,4.5),n.breaks = 10) +
     theme(panel.grid.minor = element_blank(),
           axis.text = element_text(size = 8),
           legend.title = element_text(size = 9)))
