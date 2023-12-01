@@ -9,7 +9,7 @@ gen_key <- read_tsv("Phenotype_Analysis/Genotype_Coder_Key.txt") %>%
 trait_key <- read_tsv("Phenotype_Analysis/SAS_Output_Files/LA_Results/Coded_Traits.txt")
 
 
-comb_data <- read_tsv("Phenotype_Analysis/SAS_Output_Files/LA_Results/BLUEs_Results_Full.txt",
+comb_data <- read_tsv("Phenotype_Analysis/SAS_Output_Files/LA_Results/BLUEs_Results_Parents.txt",
                       na = c(".","_"))
 
 calc_blues <- function(data, 
@@ -67,24 +67,6 @@ calc_blues <- function(data,
   }
   
 }
-
-blues <- calc_blues(data = comb_data,
-                    G_effect = "Switch*Gen2*Grp(Pop)",
-                    PG_effect = "Switch*Pop*Grp",
-                    no_parents = TRUE) %>% 
-  mutate(P_G = mu + G + Pop_G) %>% 
-  select(-Pop_G,-G,-mu,-Env) %>% 
-  left_join(gen_key,
-            by = c("Pop","Gen2")) %>% 
-  left_join(trait_key,
-            by = c("Coded_Trait")) %>% 
-  rename(P = P_G)
-
-write_tsv(x = blues %>% 
-            select(-Coded_Trait) %>% 
-            pivot_wider(names_from = 'Trait',
-                        values_from = 'P'),
-          path = "Phenotype_Analysis/BLUEs/Comb_Analysis_BLUEs_Pop.txt")
 
 traits <- blues %>%
   select(Gen2,Trait,P) %>% 
