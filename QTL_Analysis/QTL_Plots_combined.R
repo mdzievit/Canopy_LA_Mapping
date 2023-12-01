@@ -17,7 +17,7 @@ traits <- read_tsv("QTL_Analysis/Trait_Key.txt") %>%
     Trait == 5 ~ "Canopy slope",
     Trait == 1 ~ "Canopy average"))
 
-###Compiled the LOD score outputs from IcIM software into one file to create 
+###Compiled the LOD score outputs from QTL Cartographer software into one file to create 
 ###the QTL maps (for plotting figure 2)
 ##Input the data
 raw_data <- read_csv(file = "QTL_Analysis/B73/DH_B73-QTL_Results.csv") %>%
